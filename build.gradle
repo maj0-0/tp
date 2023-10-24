@@ -71,4 +71,8 @@ shadowJar {
     archiveFileName = 'studentconnect.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'
