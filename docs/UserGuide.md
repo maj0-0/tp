@@ -141,7 +141,7 @@ Shows a list of all students in the system.
 
 Edits an existing student in the system.
 
-#### Format: `edit EMAIL [n/NAME] [m/MAJOR] [y/YEAR] [e/EMAIL] [d/DESCRIPTION] [t/TUTORIALS] [sm/SOCIALMEDIA] [nt/NATIONALITY] [g/GENDER]…​`
+#### Format: `edit EMAIL [n/NAME] [m/MAJOR] [y/YEAR] [e/EMAIL] [d/DESCRIPTION] [t/TUTORIALS] [sm/SOCIALMEDIA]…​ [nt/NATIONALITY] [g/GENDER]`
 
 * Edits the student with the specified EMAIL.
 * At least one of the optional fields must be provided.
