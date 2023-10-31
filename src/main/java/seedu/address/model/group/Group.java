@@ -7,6 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.group.tasks.Task;
+import seedu.address.model.group.tasks.TaskLoader;
+import seedu.address.model.group.tasks.UniqueTaskList;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,6 +22,8 @@ public class Group {
 
     private final int number;
     private Set<Person> members = new HashSet<>();
+    private Set<Task> tasks = new HashSet<>();
+    private UniqueTaskList tasksList;
 
     /**
      * Constructs a {@code Group}.
@@ -38,6 +43,8 @@ public class Group {
     public Group(int number, Set<Person> members) {
         this.number = number;
         this.members = members;
+        tasksList = TaskLoader.loadTasks();
+        this.tasks.addAll(tasksList.asUnmodifiableObservableList());
     }
 
     /**
@@ -96,6 +103,22 @@ public class Group {
 
         return otherGroup != null
                 && otherGroup.getNumber() == this.number;
+    }
+
+    /**
+     * Adds a task to the group.
+     *
+     * @param task The task to be added.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    /**
+     * Returns an unmodifiable view of the tasks set.
+     */
+    public Set<Task> getTasks() {
+        return Collections.unmodifiableSet(tasks);
     }
 
     /**

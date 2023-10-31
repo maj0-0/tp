@@ -13,6 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.exceptions.DuplicateTaskException;
+import seedu.address.model.group.tasks.Task;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
@@ -136,6 +138,13 @@ public class ModelManager implements Model {
         return false;
     }
 
+    @Override
+    public void addTask(Task task) throws DuplicateTaskException {
+        requireNonNull(task);
+        addressBook.addTask(task);
+    }
+
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -196,4 +205,5 @@ public class ModelManager implements Model {
 
         return Optional.empty();
     }
+
 }

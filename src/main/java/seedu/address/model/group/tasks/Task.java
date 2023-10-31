@@ -255,6 +255,20 @@ public class Task {
     }*/
 
     /**
+     * Returns true if both tasks have the same name and description.
+     * This defines a weaker notion of equality between two tasks.
+     */
+    public boolean isSameTask(Task otherTask) {
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask != null
+            && otherTask.task.equals(task)
+            && otherTask.status.equals(status);
+    }
+
+    /**
      * Generates String representation to be saved in text file.
      */
     public String generateStr() {
@@ -268,4 +282,3 @@ public class Task {
         return;
     }
 }
-

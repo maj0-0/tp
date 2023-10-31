@@ -8,8 +8,12 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
+import seedu.address.model.group.exceptions.DuplicateTaskException;
+import seedu.address.model.group.tasks.Task;
+import seedu.address.model.group.tasks.UniqueTaskList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+
 
 /**
  * Wraps all data at the address-book level
@@ -19,6 +23,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
+    private final UniqueTaskList tasks;
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +36,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
+        tasks = new UniqueTaskList();
     }
 
     public AddressBook() {}
@@ -136,6 +143,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(group);
 
         group.addMember(person);
+    }
+
+    //// task-level operations
+
+    /**
+     * Adds a task to the address book.
+     * The task must not already exist in the address book.
+     */
+    public void addTask(Task t) throws DuplicateTaskException {
+        tasks.add(t);
     }
 
     //// util methods

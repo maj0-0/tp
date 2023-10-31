@@ -7,6 +7,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.exceptions.DuplicateTaskException;
+import seedu.address.model.group.tasks.Task;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
@@ -100,6 +102,13 @@ public interface Model {
      * @param group The group that the person will be added to.
      */
     void addPersonToGroup(Person person, Group group);
+
+    /**
+     * Adds the given task to the model.
+     *
+     * @param task The task to be added.
+     */
+    void addTask(Task task) throws DuplicateTaskException;
 
     Optional<Person> getPersonWithEmail(Email email);
 

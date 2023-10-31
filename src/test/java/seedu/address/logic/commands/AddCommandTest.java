@@ -24,6 +24,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.exceptions.DuplicateTaskException;
+import seedu.address.model.group.tasks.Task;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -132,6 +134,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addPersonToGroup(Person person, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTask(Task task) throws DuplicateTaskException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -169,6 +181,16 @@ public class AddCommandTest {
         @Override
         public Optional<Person> getPersonWithEmail(Email email) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Group> getGroupWithNumber(int number) {
+            return Optional.empty();
+        }
+
+        @Override
+        public boolean personIsInAGroup(Person person) {
+            return false;
         }
     }
 
