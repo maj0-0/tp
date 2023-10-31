@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -21,6 +22,8 @@ import seedu.address.model.tutorial.Tutorial;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
+
+    public static final String MESSAGE_INVALID_GROUP_NUMBER = "Group number is not a non-zero unsigned integer.";
 
     /**
      * Parses a {@code String name} into a {@code Name}.
@@ -183,6 +186,19 @@ public class ParserUtil {
             throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
         }
         return new Gender(trimmedGender);
+    }
+
+    /**
+     * Parses {@code groupNumber} into an {@code Integer} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified group number is invalid (not non-zero unsigned integer).
+     */
+    public static int parseGroupNumber(String groupNumber) throws ParseException {
+        String trimmedIndex = groupNumber.trim();
+        if (!Group.isValidGroupNumber(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_GROUP_NUMBER);
+        }
+        return Integer.parseInt(trimmedIndex);
     }
 
 }

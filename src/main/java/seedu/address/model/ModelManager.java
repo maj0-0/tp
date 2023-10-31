@@ -25,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Group> filteredGroups;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
     }
 
     public ModelManager() {
@@ -119,6 +121,21 @@ public class ModelManager implements Model {
         addressBook.addGroup(group);
     }
 
+    @Override
+    public void addPersonToGroup(Person person, Group group) {
+        addressBook.addPersonToGroup(person, group);
+    }
+
+    @Override
+    public boolean personIsInAGroup(Person person) {
+        for (Group group : addressBook.getGroupList()) {
+            if (group.hasMember(person)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -150,7 +167,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredGroups.equals(otherModelManager.filteredGroups);
     }
 
     @Override
@@ -161,6 +179,18 @@ public class ModelManager implements Model {
         for (Person person : filteredPersons) {
             if (person.getEmail().equals(email)) {
                 return Optional.of(person);
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Group> getGroupWithNumber(int number) {
+        // Iterate through the filtered list of groups
+        for (Group group : filteredGroups) {
+            if (group.getNumber() == number) {
+                return Optional.of(group);
             }
         }
 

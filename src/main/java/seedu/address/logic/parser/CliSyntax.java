@@ -15,5 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SOCIAL_MEDIA_LINK = new Prefix("sm/");
     public static final Prefix PREFIX_NATIONALITY = new Prefix("nt/");
     public static final Prefix PREFIX_GENDER = new Prefix("g/");
+    public static final Prefix PREFIX_GROUP = new Prefix("gr/");
 
 }

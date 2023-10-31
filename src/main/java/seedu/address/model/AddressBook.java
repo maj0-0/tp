@@ -125,6 +125,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.add(group);
     }
 
+    /**
+     * Adds the given {@code Person} to the give {@code Group}.
+     *
+     * @param person The person to be added.
+     * @param group The group that the person will be added to.
+     */
+    public void addPersonToGroup(Person person, Group group) {
+        requireNonNull(person);
+        requireNonNull(group);
+
+        group.addMember(person);
+    }
+
     //// util methods
 
     @Override

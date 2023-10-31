@@ -93,5 +93,22 @@ public interface Model {
      */
     void addGroup(Group group);
 
+    /**
+     * Adds the given {@code Person} to the give {@code Group}.
+     *
+     * @param person The person to be added.
+     * @param group The group that the person will be added to.
+     */
+    void addPersonToGroup(Person person, Group group);
+
     Optional<Person> getPersonWithEmail(Email email);
+
+    Optional<Group> getGroupWithNumber(int number);
+
+    /**
+     * Returns true if the given person is in a group.
+     *
+     * @param person The person to be checked.
+     */
+    boolean personIsInAGroup(Person person);
 }

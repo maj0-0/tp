@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -44,6 +45,16 @@ public class Messages {
                 .append("; Description: ").append(person.getDescription())
                 .append("; Tutorial: ").append(person.getTutorials())
                 .append("; Social Media: ").append(person.getSocialMediaLinks());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code group} for display to the user.
+     */
+    public static String format(Group group) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Group Number: ").append(group.getNumber())
+                .append("; Members: ").append(group.getMembers());
         return builder.toString();
     }
 

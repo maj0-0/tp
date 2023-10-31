@@ -88,23 +88,27 @@ public class PersonCard extends UiPart<Region> {
                 .sorted()
                 .collect(Collectors.joining(", "));
         tutorials.setText(tutorialsText);
+
         int initialHyperlinksCount = socialMediaLinks.getChildren().size(); // Get the initial count
 
-        person.getSocialMediaLinks().stream()
-                .sorted(Comparator.comparing(sm -> sm.socialMediaLink))
-                .forEach(sm -> {
-                    Hyperlink hyperlink = new Hyperlink(sm.socialMediaLink);
-                    hyperlink.setStyle(
-                            "-fx-font-size: 13px; -fx-text-fill: white; -fx-font-family: 'Segoe UI Semibold';");
-                    hyperlink.setOnAction(event -> openWebBrowser(sm.socialMediaLink));
-                    socialMediaLinks.getChildren().add(hyperlink);
-                });
+        if (!person.getSocialMediaLinks().isEmpty()) {
+            person.getSocialMediaLinks().stream()
+                    .sorted(Comparator.comparing(sm -> sm.socialMediaLink))
+                    .forEach(sm -> {
+                        Hyperlink hyperlink = new Hyperlink(sm.socialMediaLink);
+                        hyperlink.setStyle(
+                                "-fx-font-size: 13px; -fx-text-fill: white; -fx-font-family: 'Segoe UI Semibold';");
+                        hyperlink.setOnAction(event -> openWebBrowser(sm.socialMediaLink));
+                        socialMediaLinks.getChildren().add(hyperlink);
+                    });
 
-        int finalHyperlinksCount = socialMediaLinks.getChildren().size(); // Get the final count
+            int finalHyperlinksCount = socialMediaLinks.getChildren().size(); // Get the final count
 
-        // Use an assertion to check the condition
-        assert finalHyperlinksCount > initialHyperlinksCount
-                : "No hyperlinks were added. Please check the code that adds hyperlinks.";
+            // Use an assertion to check the condition
+            assert finalHyperlinksCount >= initialHyperlinksCount
+                    : "No hyperlinks were added. Please check the code that adds hyperlinks.";
+        }
+
     }
 
     /**

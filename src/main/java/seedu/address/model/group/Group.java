@@ -1,5 +1,7 @@
 package seedu.address.model.group;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +14,8 @@ import seedu.address.model.person.Person;
  * Guarantees: details are present and not null, number is immutable.
  */
 public class Group {
+
+    private static final int MAXIMUM_SIZE = 5;
 
     private final int number;
     private Set<Person> members = new HashSet<>();
@@ -51,6 +55,34 @@ public class Group {
 
     public Set<Person> getMembers() {
         return Collections.unmodifiableSet(members);
+    }
+
+    /**
+     * Returns true if the set contains an equivalent person as the given argument.
+     */
+    public boolean hasMember(Person person) {
+        return this.members.stream().anyMatch(person::isSamePerson);
+    }
+
+    /**
+     * Returns true if the group contains the maximum number of members.
+     */
+    public boolean isFull() {
+        return this.members.size() == MAXIMUM_SIZE;
+    }
+
+    /**
+     * Returns true if the group number is a positive integer.
+     */
+    public static boolean isValidGroupNumber(String groupNumber) {
+        requireNonNull(groupNumber);
+
+        try {
+            int value = Integer.parseInt(groupNumber);
+            return value > 0 && !groupNumber.startsWith("+"); // "+1" is successfully parsed by Integer#parseInt(String)
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 
     /**
